@@ -7,35 +7,24 @@
     //     }
     // });
 
-    
+
     // set the dimensions and margins of the graph
-    var margin = {top: 10, right: 30, bottom: 30, left: 60},
-        width = 460 - margin.left - margin.right,
-        height = 400 - margin.top - margin.bottom;
+    var margin = {top: 8, right: 10, bottom: 2, left: 10},
+    width = 960 - margin.left - margin.right,
+    height = 69 - margin.top - margin.bottom;
 
-    // append the svg object to the body of the page
-    var svg = d3.select("#my_dataviz")
-      .append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
-      .append("g")
-        .attr("transform",
-              "translate(" + margin.left + "," + margin.top + ")")
-        .style('opacity', 1);
+    // NOT SURE WHY THIS IS OUTSIDE THE FUNCTION? 
+    var x = d3.scale.linear()
+    .range([0, width]);
 
-      // Set up a div to be used to display values on rollover
-      var Tooltip = d3.select("#my_dataviz")
-                  .append("div")
-                  .attr("class", "tooltip")
-                  .style("position", "absolute")
-                  .style("opacity", 0)
-                  .style("background-color", "lightgrey")
-                  .style("border", "solid")
-                  .style("border-width", ".5px")
-                  .style("border-radius", "5px")
-                  .style("padding", "5px");
+    var y = d3.scale.linear()
+    .range([height, 0]);
+    
+    // set up a method to draw the line plot
+    var line = d3.svg.line()
+    .x(function(d) { return x(d.Y); })
+    .y(function(d) { return y(d.net); });
 
-     
     
     //Read the data
     d3.csv("cleaned.csv",
@@ -71,6 +60,9 @@
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-        
+        // Add the line path elements. Note: the y-domain is set per element.
+        svg.append("path")
+        .attr("class", "line")
+        .attr("d", function(d) { y.domain([0, d.maxPrice]); return line(d.values); });
             
           })
