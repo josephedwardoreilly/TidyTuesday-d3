@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<style> /* set the CSS */
+
+  body { font: 12px Bebas;}
+
+  body {background-color: #00101f;}
+
+  .header {
+  padding: 5px;
+  text-align: left;
+  color: white;
+  font-size: 20px;
+}
+
+  text { font: 12px Bebas;}
+  
+  path { 
+      stroke: none;
+      stroke-width: .5;
+      fill: none;
+  }
+
+  .tick line{
+  visibility:hidden;
+  }
+  
+
+  .axis path,
+  .axis line {
+      fill: white;
+      stroke: white;
+      stroke-width: .5;
+      shape-rendering: crispEdges;
+  }
+</style>
+
+<head>
+  <script src="https://d3js.org/d3.v4.js"></script>  
+  <title>History of Space Launches</title>
+               
+</head>
+
+<div class="header">
+  <h1>Space - An Increasingly Private Enterprise</h1>
+  <p>Non-State actors are playing an increasing role in rocket launches since the late 1980s. <br>
+    Each point represents a single rocket launch and is coloured based on the type of agency performing the launch. <br>
+    Launches by <span style="color:#7EBDC2">state</span> based agencies are slowly being replaced by ones conducted by
+     <span style="color:#BB4430">private</span> companies and <span style="color:#FFD23F">startups</span>. <br>
+    Roll-over a point to see the type of launching agency and the name of the launching mission.</p>
+</div>
+
+
+<div id="my_dataviz"></div>
+<script src="Launches_points.js"></script>    
